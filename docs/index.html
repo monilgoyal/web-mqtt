@@ -5,14 +5,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Document</title>
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script> -->
 </head>
 
-<body>
+<body onload="startTime()">
+    <div id="txt"></div>
     <img id="img" src="">
 </body>
+
+<script>
+    function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML = '<h1>' + h + ":" + m + ":" + s + '</h1>';
+        setTimeout(startTime, 1000);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i
+        }; // add zero in front of numbers < 10
+        return i;
+    }
+</script>
 <script>
     // const host = 'ws://172.20.189.69:9001'
     const host = 'ws://ip172-18-0-46-c7io24tmrepg00dkml00-9001.direct.labs.play-with-docker.com'
